@@ -1,0 +1,78 @@
+/* export async function executed(interaction: CommandInteraction) {
+    try {
+        const user = await interaction.client.users.fetch(interaction.user.id);
+        const createdInvoice: Invoice = await createInvoice();
+        const invoiceId = createdInvoice.id || '';
+
+        // Check the invoice status periodically
+          const checkInterval = setInterval(async () => {
+             const response: Invoice = await xenditInvoiceClient.getInvoiceById({ invoiceId });
+             if (response.status !== 'PENDING') {
+                 clearInterval(checkInterval);
+ 
+                 // Sending a DM to the user
+                 await user.send(`Your invoice with ID ${invoiceId} is now paid. Thank you!`);
+                 // Optionally, also reply in the channel where the command was initiated
+                 await interaction.followUp({ content: `Invoice ${invoiceId} is now paid. A confirmation message has been sent via DM.` });
+ 
+                 await user.send(`Creating Server, Please Wait...`)
+                 const serverResponse = axios.post('https://panel.menggokil.my.id/api/application/servers', {
+                     "name": "Building",
+                     "user": 1,
+                     "egg": 1,
+                     "docker_image": "quay.io/pterodactyl/core:java",
+                     "startup": "java -Xms128M -Xmx128M -jar server.jar",
+                     "environment": {
+                         "BUNGEE_VERSION": "latest",
+                         "SERVER_JARFILE": "server.jar"
+                     },
+                     "limits": {
+                         "memory": 128,
+                         "swap": 0,
+                         "disk": 512,
+                         "io": 500,
+                         "cpu": 100
+                     },
+                     "feature_limits": {
+                         "databases": 5,
+                         "backups": 1
+                     },
+                     "allocation": {
+                         "default": 17
+                     }
+                 })
+             }
+         }, 2000); 
+         
+
+        const select = new StringSelectMenuBuilder()
+            .setCustomId('Server packages')
+            .setPlaceholder('Make a selection! Cheap, Basic, Premium, Ultimate')
+            .addOptions(
+                new StringSelectMenuOptionBuilder()
+                    .setLabel('Cheap')
+                    .setDescription('Good specs at an affordable price.')
+                    .setValue('Cheap'),
+                new StringSelectMenuOptionBuilder()
+                    .setLabel('Basic')
+                    .setDescription('Good specs with 99% uptime guarantee.')
+                    .setValue('Basic'),
+                new StringSelectMenuOptionBuilder()
+                    .setLabel('Premium')
+                    .setDescription('High-quality specs with SSD and better CPU.')
+                    .setValue('Premium'),
+                new StringSelectMenuOptionBuilder()
+                    .setLabel('Ultimate')
+                    .setDescription('Best specs with SSD, better CPU, 99.9% uptime guarantee, priority support.')
+                    .setValue('Ultimate'),
+            );
+
+        const row = new ActionRowBuilder<StringSelectMenuBuilder>()
+            .addComponents(select)
+
+        await interaction.reply({ content: `Here is your Invoice status: ${createdInvoice.status}`, components: [row], fetchReply: true });
+    } catch (error) {
+        console.error('Error during interaction:', error);
+        await interaction.reply({ content: 'An error occurred while processing your request.' });
+    }
+}*/
