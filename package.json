@@ -1,7 +1,25 @@
 {
-  "name": "bun-discord-bot",
-  "version": "0.0.5",
+  "name": "discord-bot-panel",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsup src/index.ts --minify"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "tsup": "^8.0.1",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "dependencies": {
-    "slash-create": "^5.7.1"
+    "axios": "^1.6.2",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "xendit-node": "^4.0.0"
   }
 }
