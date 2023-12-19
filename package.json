@@ -8,15 +8,20 @@
     "build": "tsup src/index.ts --minify"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "bun-types": "latest",
     "tsup": "^8.0.1",
     "tsx": "^4.6.2",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "wrangler": "^3.21.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.474.0",
+    "@aws-sdk/s3-request-presigner": "^3.474.0",
+    "@devnote-dev/pterojs": "^2.2.2",
     "axios": "^1.6.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
