@@ -51,9 +51,15 @@ export function createUserLoginModal() {
         .setStyle(TextInputStyle.Short)
         .setRequired(true);
 
+    const passwordInput = new TextInputBuilder()
+       .setCustomId('loginPassword')
+       .setLabel('Your password')
+       .setStyle(TextInputStyle.Short)
+       .setRequired(true);
 
     modal.addComponents(
         new ActionRowBuilder<TextInputBuilder>().addComponents(emailInput),
+        new ActionRowBuilder<TextInputBuilder>().addComponents(passwordInput)
     );
 
     return modal;
@@ -70,8 +76,8 @@ export function createCustomServerModal() {
         .setPlaceholder('Enter the amount of RAM in GB')
         .setStyle(TextInputStyle.Short);
 
-    const memoryInput = new TextInputBuilder()
-        .setCustomId('memory')
+    const storageInput = new TextInputBuilder()
+        .setCustomId('Storage')
         .setLabel('Storage (GB)')
         .setPlaceholder('Enter the disk space in GB')
         .setStyle(TextInputStyle.Short);
@@ -83,7 +89,7 @@ export function createCustomServerModal() {
         .setStyle(TextInputStyle.Short);
 
     const row1 = new ActionRowBuilder<TextInputBuilder>().addComponents(ramInput);
-    const row2 = new ActionRowBuilder<TextInputBuilder>().addComponents(memoryInput);
+    const row2 = new ActionRowBuilder<TextInputBuilder>().addComponents(storageInput);
     const row3 = new ActionRowBuilder<TextInputBuilder>().addComponents(cpuInput);
 
     modal.addComponents(row1, row2, row3);

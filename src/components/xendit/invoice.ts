@@ -1,5 +1,5 @@
 // invoice.ts
-import { Xendit, Invoice as InvoiceClient } from 'xendit-node';
+import { Invoice as InvoiceClient } from 'xendit-node';
 import { CreateInvoiceRequest, Invoice } from 'xendit-node/invoice/models'
 import dotenv from 'dotenv';
 

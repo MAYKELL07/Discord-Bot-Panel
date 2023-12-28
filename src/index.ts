@@ -24,15 +24,15 @@ const S3 = new S3Client({
   },
 });
 
-async function asyncCall() {
+/* async function asyncCall() {
   console.log(
     await S3.send(
       new ListBucketsCommand('')
     )
   );
 }
-
-asyncCall();
+ */
+//asyncCall();
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages],

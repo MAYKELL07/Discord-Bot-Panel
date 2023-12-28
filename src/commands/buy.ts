@@ -71,23 +71,24 @@ export async function execute(interaction: CommandInteraction) {
                     ])
             );
         // Ask the user if they have an account
-        const accountCheckMenu = new ActionRowBuilder<StringSelectMenuBuilder>()
+        const accountCheckButtons = new ActionRowBuilder<ButtonBuilder>()
             .addComponents(
-                new StringSelectMenuBuilder()
-                    .setCustomId('account-check')
-                    .setPlaceholder('Do you have an account on our panel?')
-                    .addOptions([
-                        { label: 'Yes, I have an account', value: 'existing' },
-                        { label: 'No, I need to create an account', value: 'new' }
-                    ])
+                new ButtonBuilder()
+                    .setCustomId('existing-account')
+                    .setLabel('Yes, I have an account')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder() 
+                    .setCustomId('new-account')
+                    .setLabel('No, I need to create an account')
+                    .setStyle(ButtonStyle.Secondary)
             );
 
-        await user.send({ content: 'Please let us know about your account status:', components: [accountCheckMenu] });
-
+        await user.send({ content: 'Please let us know about your account status:', components: [accountCheckButtons] });
 
         //await user.send({ content: 'Please select your server package:', components: [serverMenu] });
-
-        interaction.client.on('interactionCreate', async (interaction) => {
+        
+        interaction.client.on('interactionCreate', async (interaction) => { 
+            console.log(interaction.type)
             if (interaction.isStringSelectMenu()) {
                 if (interaction.customId === 'server-selection') {
                     // Handle server selection
@@ -99,10 +100,10 @@ export async function execute(interaction: CommandInteraction) {
                     if (selectedPackage === 'custom') {
                         await interaction.showModal(createCustomServerModal());
                     } else {
-                        const price = calculatePrice(selectedPackage);
+                        //const price = calculatePrice(selectedPackage);
                         userSessions.set(userId, {
                             selectedPackage: selectedPackage,
-                            price: price
+                            //price: price
                         });
 
                         const button = new ButtonBuilder()
@@ -122,9 +123,9 @@ export async function execute(interaction: CommandInteraction) {
                 } else if (interaction.customId === 'account-check') {
                     const accountStatus = interaction.values[0];
 
-                    if (accountStatus === 'new') {
+                    if (accountStatus === 'new-account') {
                         await interaction.showModal(createUserRegistrationModal());
-                    } else if (accountStatus === 'existing') {
+                    } else if (accountStatus === 'existing-account') {
                         await interaction.showModal(createUserLoginModal());
                     }
                 }
@@ -141,11 +142,11 @@ export async function execute(interaction: CommandInteraction) {
                     const cpu = parseInt(interaction.fields.getTextInputValue('cpu'));
 
                     // Calculate the price for custom specs
-                    const price = calculatePrice('custom', { ram, memory, cpu });
+                    //const price = calculatePrice('custom', { ram, memory, cpu });
                     userSessions.set(userId, {
                         selectedPackage: 'custom',
                         Specs: { ram, memory, cpu },
-                        price: price
+                        //price: price
                     });
 
                     // Send the details button after receiving custom specs
@@ -302,9 +303,15 @@ export async function execute(interaction: CommandInteraction) {
                         interaction.user.send({ content: `Error: ${errorMessage}` });
                     }
                 }
-            } else if (interaction.isButton() && interaction.customId === 'details-button') {
-                const purchaseModal = createPurchaseDetailsModal()
-                await interaction.showModal(purchaseModal);
+            } else if (interaction.isButton()) {
+                if ( interaction.customId === 'details-button') {
+                    const purchaseModal = createPurchaseDetailsModal()
+                    await interaction.showModal(purchaseModal);
+                } else if ( interaction.customId === 'existing-account' ) {
+                    
+                } else if ( interaction.customId === 'new-account' ) {
+                    
+                }
             }
         });
     } catch (error) {

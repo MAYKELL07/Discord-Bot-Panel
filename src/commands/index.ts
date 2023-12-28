@@ -1,9 +1,11 @@
 import * as ping from "./ping";
 import * as buy from "./buy"
-import * as createEmbed from "./createEmbed"
+import * as embed from "./embed"
+import * as testbuy from "./testbuy"
 
 export const commands = {
   ping,
   buy,
-  createEmbed
+  embed,
+  testbuy
 };
